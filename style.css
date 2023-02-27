@@ -1,0 +1,313 @@
+/* === TYPOGRAPHY === */
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: var(--icon-size, 24px);
+    padding: 8px;
+}
+
+
+
+/* === MAIN STYLES === */
+
+body {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background: #88dc88;
+    font-family: monospace, system-ui;
+    flex: 2;
+    overflow: hidden;
+}
+
+aside {
+    --icon-size: 30px;
+
+    background: #52a552;
+    box-sizing: border-box;
+    padding: 0;
+    max-width: 400px;
+    flex: 1;
+}
+
+aside nav {
+    margin: 24px 0px;
+    width: 80%;
+    height: 100%;
+    align-self: end;
+}
+
+aside nav a {
+    width: 100%;
+    height: 60px;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    font-size: 24px;
+    border-radius: 24px 0 0 24px;
+    overflow: hidden;
+}
+
+aside nav a > span:last-child {
+    margin-left: 12px;
+}
+
+aside nav a:hover {
+    background: #3d5b3d;
+    color: white;
+}
+
+aside nav a[active] {
+    background: #88dc88;
+    color: darkgreen;
+}
+
+
+#logo {
+  width: 256px;
+  height: auto;
+  margin: 24px;
+}
+
+
+.vertical-layout {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.horizontal-layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.centered-layout {
+    justify-content: center;
+    align-items: center;
+}
+.center-layout {
+  align-items: center;
+}
+
+.logo-name {
+    color: #88dc88;
+    text-align: center;
+}
+
+
+main {
+    flex: 1;
+    padding: 24px;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+footer p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer a {
+  color: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  color: darkred;
+}
+
+footer img {
+  width: 20px;
+  height: 20px;
+  margin: 0 4px;
+
+}
+
+
+
+/* ====== Orig. Connection Styles ====== */
+
+
+main h2 {
+  font-size: xx-large;
+}
+
+form {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  padding: 12px 24px;
+  max-width: 400px;
+}
+
+
+input {
+  border: 0;
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  margin: 12px 0;
+  font-size: 24px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  height: 60px;
+  background: darkgreen;
+  color: white;
+  font-family: monospace;
+  border: 0;
+  border-radius: 50px;
+  margin: 24px 0;
+  font-size: 28px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: 400px;
+}
+
+.msg {
+    background: black;
+    padding: 8px 16px;
+    color: white;
+    border-radius: 8px;
+}
+
+.msg.error {
+  background: #4a0b0b;
+  color: #eeacac;
+}
+
+.msg.success {
+  background: darkgreen;
+  color: lightgreen;
+}
+
+.mo-emoji {
+  width: 256px;
+  height: auto;
+}
+
+.success.container {
+
+}
+
+.success.container a {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.container[connected] {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url('images/wallpaper_nobg.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+}
+
+.container[connected] .title {
+  font-size: 100px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 48px;
+}
+
+.container[connected] .title span {
+  color: #337027;
+}
+
+table {
+  width: 80%;
+  height: auto;
+}
+
+thead {
+  background: wheat;
+  height: 34px;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+tr {}
+
+td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid darkgreen;
+}
+
+td.login {}
+
+td.prenom {}
+
+td.nom {}
+
+td.password {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+tbody tr:hover {
+  background: darkgreen;
+  color: lightgreen;
+}
+
+img.comment {
+  width: 300px;
+  height: auto;
+}
+
+textarea {
+  width: 393px;
+  min-height: 250px;
+  border-radius: 24px;
+  margin: 0 auto;
+  font-size: 24px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+a.fab {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: scale(1.5);
+  margin: 48px;
+  width: 48px;
+  height: 48px;
+}
+
+a.fab button {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+}
