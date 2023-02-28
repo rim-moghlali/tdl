@@ -127,7 +127,7 @@ if (isset($_GET['error'])){
  
         <h2 class="logo-name">tdl</h2>
 
-        <?php $_GET['page'] = 'profile'; $_GET['login'] = $login; include 'components/nav.php' ?>
+        <?php $_GET['page'] = 'profile'; $_GET['login'] = $user->login; include 'components/nav.php' ?>
          
         <?php include 'components/footer.php' ?>
 
@@ -156,7 +156,7 @@ if (isset($_GET['error'])){
 
 
          
-          <input type="text" id="login" name="login" placeholder="Login" value="<?= $login ?>" <?= $login == 'admin' ? 'disabled' : '' ?> required>
+          <input type="text" id="login" name="login" placeholder="Login" value="<?= $user->login ?>" <?= $user->login == 'admin' ? 'disabled' : '' ?> required>
          
           <input type="password" id="password" name="password" placeholder="Password"  required>
         
