@@ -94,12 +94,16 @@ section > button:hover {
     min-height: 200px;
     background: none;
     text-align: center;
-    color: #5e5e20;
+    color: white;
     font-weight: bold;
     font-size: 38px;
     margin: 24px auto;
     word-spacing: -7px;
     resize: none;
+}
+
+#creator textarea:focus-within {
+    filter: drop-shadow(2px 4px 6px darkgreen);
 }
 
 #creator textarea:focus {
@@ -110,7 +114,7 @@ section > button:hover {
     width: 90%;
     font-size: larger;
     text-transform: uppercase;
-    background: #5e5e20;
+    background: #020a02;
     color: beige;
     border: 0;
     border-radius: 24px;
@@ -121,6 +125,11 @@ section > button:hover {
     bottom: 24px;
 
     transition: transform 400ms ease;
+}
+
+#creator button:hover {
+    background: white;
+    color: darkgreen;
 }
 
 #creator button:active {
@@ -267,6 +276,8 @@ input[type=checkbox]:checked ~ p {
     border-top: 1px solid lightgray;
     border-radius: 0 0 24px;
     overflow: hidden;
+    padding: 0 24px;
+    height: 60px;
 }
 
 .input-container input {
@@ -289,10 +300,13 @@ input[type=checkbox]:checked ~ p {
     color: #777777;
     background: #e4e4e4;
     cursor: pointer;
+    width: fit-content;
+    margin: 8px 0;
+    height: 40px;
 }
 
 .input-container button:hover {
-    background: black;
+    background: rgb(0, 46, 0);
     color: white;
 }
 
@@ -375,7 +389,7 @@ button.checkbox-wrapper {
 
 @media (min-width: 1400px) {
     #allTodos > ul {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
