@@ -12,7 +12,7 @@ if (!$connected){
 
 
  
-$sql = "SELECT `id` FROM `utilisateurs` WHERE login = 'admin'";
+$sql = "SELECT `id` FROM `users` WHERE login = 'admin'";
 $result = $conn->query($sql);
 $admin = $result->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +28,7 @@ if ($id != $admin_id) {
 }
 
 
-$sql_users = "SELECT * FROM `utilisateurs` WHERE id != '$admin_id'";
+$sql_users = "SELECT * FROM `users` WHERE id != '$admin_id'";
 
 $result = $conn->query($sql_users);
 $users = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -74,7 +74,7 @@ $users = $result->fetchAll(PDO::FETCH_ASSOC);
   
       <img id="logo" src="images/logo.gif" alt="Module Connexion Gif" />
    
-      <h1 class="title">Liste des utilisateurs</h1>
+      <h1 class="title">Liste des users</h1>
 
       <table>
           <thead>

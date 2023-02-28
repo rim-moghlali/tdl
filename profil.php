@@ -1,14 +1,16 @@
 <?php
 
-include 'api/db_connect.php';
-include 'api/user_auth.php';
+session_start();
+include_once('api/user-pdo.php');
+
+$user = new Userpdo();
 
 
-
-if (!$connected) { 
+if (!$user->isConnected()) {
  
   header('Location: index.php');
-} 
+  exit();
+}
 
     
 
@@ -31,38 +33,40 @@ if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['re_passw
    
     if($new_password == $new_re_password) {
        
+      $user->update($login, $email, $password, $firstname, $lastname);
+
+      header('Location: profil.php?success');
      
-      $sql_search_user = "SELECT COUNT(*) FROM utilisateurs where login = '$new_login'";
-      $result = $conn->query($sql_search_user);
+      // $sql_search_user = "SELECT COUNT(*) FROM users where login = '$new_login'";
+      // $result = $conn->query($sql_search_user);
       
-      $count = $result->fetchColumn();
+      // $count = $result->fetchColumn();
 
+      // echo "login => $login";
+      // echo "new_login => $new_login";
 
-      echo "login => $login";
-      echo "new_login => $new_login";
-
-      echo "count: ";
-      var_dump($count);
+      // echo "count: ";
+      // var_dump($count);
 
      
-      if ($new_login === $login || $count === '0') {
+      // if ($new_login === $login || $count === '0') {
 
    
-        $new_password = password_hash($new_password, PASSWORD_DEFAULT);
+      //   $new_password = password_hash($new_password, PASSWORD_DEFAULT);
        
-        $sql_new_user = "UPDATE `utilisateurs` SET 
-          login = '$new_login', 
-          password = '$new_password' 
-          WHERE id = '$id'
-        ";
+      //   $sql_new_user = "UPDATE `users` SET 
+      //     login = '$new_login', 
+      //     password = '$new_password' 
+      //     WHERE id = '$id'
+      //   ";
           
-        $conn->exec($sql_new_user);
+      //   $conn->exec($sql_new_user);
 
-        header('Location: profil.php?success');
+      // header('Location: profil.php?success');
 
-      } else{
-        header('Location: profil.php?error=1'); 
-      }
+      //  else{
+      //   header('Location: profil.php?error=1'); 
+      // }
 
     } else{
         header('Location: profil.php?error=2'); 

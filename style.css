@@ -201,7 +201,7 @@ button {
 }
 
 .success.container {
-
+  align-items: center;
 }
 
 .success.container a {

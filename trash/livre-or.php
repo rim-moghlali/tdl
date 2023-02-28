@@ -4,8 +4,8 @@ include 'api/db_connect.php';
 include 'api/user_auth.php';
 
 $result = $conn->query("SELECT `commentaire`, `login`, `date` FROM `commentaires`
-INNER JOIN `utilisateurs`
-ON commentaires.id_utilisateur = utilisateurs.id
+INNER JOIN `users`
+ON commentaires.id_utilisateur = users.id
 ORDER BY `date` DESC");
 
 $comments = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ $comments = $result->fetchAll(PDO::FETCH_ASSOC);
         <!-- Nom du site -->
         <h2 class="logo-name">tdl</h2>
 
-        <?php $_GET['page'] = 'tdl'; $_GET['login'] = $login; include 'components/nav.php' ?>
+        <?php $_GET['page'] = 'todolist'; $_GET['login'] = $login; include 'components/nav.php' ?>
 
         <?php include 'components/footer.php' ?>
 

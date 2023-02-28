@@ -1,72 +1,59 @@
 <?php
 
-include 'api/db_connect.php';
-include 'api/user_auth.php';
+session_start();
+include_once('api/user-pdo.php');
+
+$user = new Userpdo();
+
+// include 'api/db_connect.php';
+// include 'api/user_auth.php';
 
 
 
-if ($connected) {
+if ($user->isConnected()) {
  
   if (isset($_GET['logout'])) {
   
-    session_unset();
+    $user->disconnect();
   }
   
  
   header('Location: index.php');
+  exit();
 }
 
 
+if(isset($_POST['register'])){
+  if(!empty($_POST['login']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['password']) && !empty($_POST['re_password'])){
+      $login=htmlspecialchars($_POST['login']);  //htmlspecialchar to secure the data
+      $email = isset($_POST['email']) ? htmlspecialchars($_POST['email']) : "";
+      $firstname=htmlspecialchars($_POST['firstname']);
+      $lastname=htmlspecialchars($_POST['lastname']);
+      $password=htmlspecialchars($_POST['password']);
+      $re_password=htmlspecialchars($_POST['re_password']);
 
-if(isset($_POST['login']) && isset($_POST['password']) && isset($_POST['re_password'])){
+      if ($password == $re_password) {
 
+        if ($user->register($login, $email, $password, $firstname, $lastname)) {
+          header('Location: inscription.php?success');
+        }else {
+          header('Location: inscription.php?error=2'); 
+        }
 
-  $login = validate($_POST['login']);
-  $password = validate($_POST['password']);
-  $re_password = validate($_POST['re_password']);
+        exit();
 
- 
-
-  if ($login !== '' && $password !== '' && $re_password !== '') {
-
-    echo "login => $login";
-    echo "password => $password";
-    echo "re_password => $re_password";
-    
-   
-    if($password == $re_password){
-      
-    
-      $sql_search_user = "SELECT COUNT(*) FROM utilisateurs where login = '$login'";
-      $result = $conn->query($sql_search_user);
-    
-      $count = $result->fetchColumn();
-    
-
-      
-      if($count == 0){ 
-
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        $sql_new_user = "INSERT INTO utilisateurs (login, password) VALUES ('$login', '$password')";
-        $conn->exec($sql_new_user);
-
-        header('Location: inscription.php?success');
-
-      } else{
-        header('Location: inscription.php?error=1'); 
+      } else {
+          echo "<p class='err-msg'>passwords do not match</p>";
       }
 
-    } else{
-        header('Location: inscription.php?error=2'); 
-    }
-
+      
   } else {
-      header('Location: inscription.php?error=3'); 
+      echo "<p class='err-msg'>Veuillez completer tous les champs...</p>";
+      
   }
 
+
 }
-
-
 
 
 $error = false;
@@ -115,7 +102,7 @@ if (isset($_GET['error'])){
         <!-- Nom du site -->
         <h2 class="logo-name">tdl</h2>
 
-        <?php $_GET['page'] = 'register'; $_GET['login'] = $login; include 'components/nav.php' ?>
+        <?php $_GET['page'] = 'register'; $_GET['login'] = $user->login; include 'components/nav.php' ?>
 
         <?php include 'components/footer.php' ?>
 
@@ -142,14 +129,20 @@ if (isset($_GET['error'])){
       
       <form method="post">
 
+      
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
 
-        <input type="text" id="login" name="login" placeholder="Login" value="<?= $login ?>" required>
+        <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+
+        <input type="text" id="login" name="login" placeholder="Login" value="<?= $user->login ?>" required>
            
         <input type="password" id="password" name="password" placeholder="Password"  required>
        
-        <input type="password" id="re_password" name="re_password" placeholder="Confirmer votre password" required>
-     
-        <button>S'inscrire</button>
+        <input type="password" id="re_password" name="re_password" placeholder="Confirm your password" required>
+
+        <input type="email" id="email" name="email" placeholder="example@laplateforme.io" required>
+
+        <button name="register">S'inscrire</button>
       </form>
 
 

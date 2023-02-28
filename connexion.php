@@ -1,19 +1,29 @@
 <?php
 
-include 'api/db_connect.php';
-include 'api/user_auth.php';
+session_start();
+
+include_once 'api/user-pdo.php';
+
+$user = new Userpdo();
+
+
+// include 'api/db_connect.php';
+// include 'api/user_auth.php';
 
 
 
-if ($connected) {
+if ($user->isConnected()) {
    
     if (isset($_GET['logout'])) {
         
-        session_unset();
+        $user->disconnect();
+
+        // session_unset();
     }
     
 
     header('Location: index.php');
+    exit();
 } 
 
     
@@ -22,32 +32,43 @@ if (isset($_POST['login']) && isset($_POST['password'])){
     $login = validate($_POST['login']);
     $password = validate($_POST['password']);
 
-    $result = $conn->query("SELECT * FROM `utilisateurs` WHERE login = '$login'");
-    $user = $result->fetch(PDO::FETCH_ASSOC);
+    $user->connect($login, $password);
+
+
+    if ($user->isConnected()) {
+        header('Location: index.php');
+    }else {
+        header('Location: connexion.php?error=1');
+    }
+
+    exit();
+
+    // $result = $conn->query("SELECT * FROM `users` WHERE login = '$login'");
+    // $user = $result->fetch(PDO::FETCH_ASSOC);
     
 
 
-    if ($user) {
+    // if ($user) {
         
         
-        $hash_password = $user['password'];
+    //     $hash_password = $user['password'];
 
       
 
-        if (password_verify($password, $hash_password)) { 
+    //     if (password_verify($password, $hash_password)) { 
             
-          $_SESSION['id'] = $user['id'];
+    //       $_SESSION['id'] = $user['id'];
 
-          header('Location: index.php');
+    //       header('Location: index.php');
             
-        }else {
-            header('Location: connexion.php?error=2');
-        }
+    //     }else {
+    //         header('Location: connexion.php?error=2');
+    //     }
 
 
-    } else {
-        header('Location: connexion.php?error=1');
-    }
+    // } else {
+    //     header('Location: connexion.php?error=1');
+    // }
 
     
       
@@ -79,8 +100,8 @@ if (isset($_POST['login']) && isset($_POST['password'])){
         <!-- Nom du site -->
         <h2 class="logo-name">tdl</h2>
 
-        <?php $_GET['page'] = 'login'; $_GET['login'] = $login; include 'components/nav.php' ?>
-
+        <?php $_GET['page'] = 'login'; $_GET['login'] = $user->login; include 'components/nav.php' ?>
+        
         <?php include 'components/footer.php' ?>
 
     </aside>

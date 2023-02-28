@@ -16,8 +16,8 @@ $connected = false;
 if (isset($_SESSION['id'])) {
     // get that id
     $id = $_SESSION['id'];
-    // select the login from the `utilisateurs` table of this user w/ `id`
-    $result = $conn->query("SELECT login FROM `utilisateurs` WHERE id = '$id'");
+    // select the login from the `users` table of this user w/ `id`
+    $result = $conn->query("SELECT login FROM `users` WHERE id = '$id'");
     $user = $result->fetch(PDO::FETCH_ASSOC);
 
     // TEST

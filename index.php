@@ -1,7 +1,14 @@
 <?php
 
-include 'api/db_connect.php';
-include 'api/user_auth.php';
+session_start();
+include_once('api/user-pdo.php');
+
+$user = new Userpdo();
+
+// include 'api/db_connect.php';
+// include 'api/user_auth.php';
+
+// session_unset();
 
 ?>
 
@@ -26,7 +33,7 @@ include 'api/user_auth.php';
         <!-- Nom du site -->
         <h2 class="logo-name">tdl</h2>
 
-        <?php $_GET['page'] = 'home'; $_GET['login'] = $login; include 'components/nav.php' ?>
+        <?php $_GET['page'] = 'home'; $_GET['login'] = $user->login; include 'components/nav.php' ?>
 
         <?php include 'components/footer.php' ?>
 
@@ -34,10 +41,10 @@ include 'api/user_auth.php';
 
 
     <main class="vertical-layout centered-layout">
-      <?php if ($connected): ?>
+      <?php if ($user->isConnected()): ?>
   
       <div class="container" connected fit>
-        <h1 class="title">Bonjour <span><?= $login ?></span></h1> 
+        <h1 class="title">Bonjour <span><?= $user->firstname ?></span></h1> 
       </div>
 
 
@@ -48,7 +55,7 @@ include 'api/user_auth.php';
      
       <h1 class="title">Bienvenue à mon to-do list</h1>
      
-      <p>Connecter vous pour utiliser ce site et modifier votre profil</p>
+      <p>Connecter vous pour utiliser ce site et ajouter une tache dans votre liste to-do.</p>
 
       <?php endif; ?>
 
