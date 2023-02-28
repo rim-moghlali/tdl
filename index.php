@@ -10,6 +10,11 @@ $user = new Userpdo();
 
 // session_unset();
 
+// if ($user->isConnected()) {
+//   $user->disconnect();
+//   echo "you are connected";
+// }
+
 ?>
 
 <!DOCTYPE html>

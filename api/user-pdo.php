@@ -121,6 +121,7 @@ class Userpdo extends Database { //Using "extends" in order to get propreties of
 
      if($this->isConnected()){
             unset($_SESSION);
+            session_destroy();
             echo "$this->login is disconnected";
      }
   

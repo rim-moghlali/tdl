@@ -12,7 +12,9 @@ $user = new Userpdo();
 
 
 
+
 if ($user->isConnected()) {
+    echo "you are connected";
    
     if (isset($_GET['logout'])) {
         
@@ -101,7 +103,7 @@ if (isset($_POST['login']) && isset($_POST['password'])){
         <h2 class="logo-name">tdl</h2>
 
         <?php $_GET['page'] = 'login'; $_GET['login'] = $user->login; include 'components/nav.php' ?>
-        
+
         <?php include 'components/footer.php' ?>
 
     </aside>
